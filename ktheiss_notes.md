@@ -12,6 +12,11 @@ echo "export PATH=/usr/local/packages/Modules/3.2.10/bin:$PATH" >> .bashrc
 echo "source ~/.modules" >> .bashrc
 echo "module load git" >> .modules
 ```
+```
+# Notes 2/15/22
+- git is its own command line program.
+- .bashrc file is where we can store settings we want to change. 
+```
 
 After running these commands, please log out of OnDemand, and then log back in. Once you're logged back in, open Terminal and run
 
@@ -22,6 +27,10 @@ The version number should now be 2.18.0.
 ## Personal Access Tokens
 
 Learn how to [create a personal access token for GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+```
+token used to push things onto github, customized password with limited timespan and limited authorizations. 
+```
 
 ## Global Configuration
   - When you perform operations with git, it will keep track of who you are. It does this so that things stay organized in large projects.
