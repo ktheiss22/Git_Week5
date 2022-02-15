@@ -29,7 +29,8 @@ The version number should now be 2.18.0.
 Learn how to [create a personal access token for GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 ```
-token used to push things onto github, customized password with limited timespan and limited authorizations. 
+token used to push things onto github, customized password with limited timespan and limited authorizations.
+my token: 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
 ```
 
 ## Global Configuration
@@ -47,6 +48,12 @@ token used to push things onto github, customized password with limited timespan
   - Using `ls -a`, take another look at the project directory (now also a repository)
     - What's different?
     - Explore a bit with `cd` and `cat`
+  ```
+  # Notes 2/15/22
+  - mkdir  myProject (makes the folder) 
+  - .git/ means a hidden folder, the slash at the end indicates a folder not a file 
+  - repository is contained in the .git folder
+  ```
 
 ## 'Git'ting started
   - Git projects operate on a branching model. Branches keep track of different versions of a project, without having to store completely independent copies.
@@ -59,6 +66,21 @@ token used to push things onto github, customized password with limited timespan
   - `git log` - See what commits have been made to this project
     - Since we haven't yet done anything with our repository, there is nothing yet to show in the log. First, we need to commit something.
 
+```
+2/15/22
+- series of changes to the repository are in a branch
+- branch is like a version of your project over time, main is by delault the single branch. commits recorded in main branch. 
+- git status -> checks the status of git
+- empty repository -> means no changes 
+- if we want git to track the files, use 'git add'
+- to be committed means it is aware of the file, but has not been offically comitted. 
+- staging means telling git to be prepared to add the file to the repository. 
+- git commit -M "adding outline.txt"
+- git status -> nothing to commit, working tree clean. means everything is up to date in working repository. 
+- git log -> shows the commits you made 
+- two steps: git add, then git commit. 
+```
+
 ## Git Stages
   - In order to keep track of the files associated with your project, you need to tell git to include them. Files that you associated with your repository are 'tracked'. In order to do this, use `git add`.
     - `git add outline.txt`
@@ -68,6 +90,11 @@ token used to push things onto github, customized password with limited timespan
   - Now to actually include our outline file (and any edits you've made to it) in the repository, we need to commit them. To commit everything in the staging area, we use `git commit -m <COMMIT_MESSAGE>`. The commit message should be short, but informative.
     - What information is displayed after you commit?
   - Now run `git log` again. What do you see?
+ 
+ ```
+ # Notes 2/15/22
+ - expanation of what we just did. 
+ ```
 
 ## Rolling back changes
   - Now let's make another commit, where we simulate adding something very important to our repository.
@@ -83,7 +110,7 @@ token used to push things onto github, customized password with limited timespan
     - `git add important.txt` - (We use add even though we've deleted the file. We're telling git to add the change.)
     - `git commit -m "Accidentally deleting important thing"`
   - Oh no! Now we've remembered that the thing was really important. Can we retrieve it?
-    - First, we take a look at our log - `git log --pretty=oneline --graph`
+    - First, we take a look at our log - `git log --pretty=oneline --graph` #shows commits as a list
       - Compare this output to workflow schematic above
     - Find the last commit _before_ the important thing was deleted and copy the beginning of the unique hash.
     - Use the git checkout command to go back in time and recover the 'deleted' file. `git checkout <PREVIOUS_COMMIT_HASH> important.txt`.
@@ -93,6 +120,21 @@ token used to push things onto github, customized password with limited timespan
     - Now we add our file back to the repository - `git commit -m "Adding important stuff back again"`
   - There's one other option for fixing our mistake, if we hadn't already used checkout. Instead, we could directly undo the entire commit where we mistakenly deleted the important file. Note that this is different than using checkout, because it automatically creates a new commit that undoes the previous one and it applies to the entire commit.
     - `git revert <BAD_COMMIT_HASH>`
+ ```
+ # Notes 2/15/22
+ - added another file to practice using the first few lines of code 
+ - rm file.txt to delete the file (gone from folder) 
+ - git status -> "deleted file.txt" (we have staged it) 
+ - git add or git commit -a to actually delete the file 
+ - to recover the file: (if diectory it is not able to be recovered, but since it is a repository, we can recover it). 
+ - to do this, find the commit with the version of the file we want to recover from running the code (`git log --pretty=oneline --graph`)
+ - copy the commit string, paste ( git checkout _____ file.txt) 
+ - ls to see file is back, cat to view the contents. 
+ - git status (staged checkout to recover), we still need to commit it 
+ - git commit -m "adding back file.txt"
+ - this is a good reason why git is a good resource to use especially on big projects. 
+ - git revert to roll back entire repository at once. 
+ ```
 
 ## Branching
   - So far, we have only been discussing git commands in the context of a _single version_ of a repository. However, one of the most powerful features of git is its ability to handle branches, or different versions of a project.
@@ -110,6 +152,23 @@ token used to push things onto github, customized password with limited timespan
   - Now, we can pull in the changes from our feature branch with `git merge feature One`.
   - Since main now has all the changes we made in feature One, we can delete that feature branch - `git branch -d featureOne`
   - Note that when you look at `git log --graph` now, it's as if the feature branch never existed. The changes made there are now seamlessly integrated into the main branch.
+ 
+```
+# Notes 2/15/22
+- sometimes we will use different branches or versions of the repository, we can merge changes back to the main version. 
+- git branch - to make a branch 
+- git branch branch1
+- git branch -> branch 1 (created the branch) *master 
+- git checkout branch1 -> used to pick out files from previous commits and any changes made. changes now stored here not master
+- echo "file 1 new branch" > file.1 (creating a new file) 
+- git add file1.txt
+- git commit -m "adding new file to branch1"
+- git log includes commit made to branch1
+- the green (on on demand) tells us the most recent commit on the branches. 
+- git checkout master (to look back at the master branch) 
+- git checkout branch1 (file reappears)
+- git log --graph (shows how branches diverge from eachother)
+```
 
 ## Collaborative coding
   - We are going to use git to work together to fix and expand a catalog of animals found in Louisiana.
